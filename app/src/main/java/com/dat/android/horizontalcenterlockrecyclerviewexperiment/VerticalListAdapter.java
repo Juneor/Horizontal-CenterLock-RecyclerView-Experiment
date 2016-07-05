@@ -38,7 +38,7 @@ public class VerticalListAdapter extends RecyclerView.Adapter<VerticalListAdapte
         HorizontalListAdapter horizontalListAdapter =
             new HorizontalListAdapter(context, mValues.get(position).getCheese());
         holder.horizontalList.setAdapter(horizontalListAdapter);
-        holder.horizontalList.setOnScrollListener(new CenterLockListener(0));
+        holder.horizontalList.addOnScrollListener(new CenterLockListener(0));
     }
 
     @Override
