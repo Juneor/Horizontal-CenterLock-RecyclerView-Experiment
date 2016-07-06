@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import com.dat.android.horizontalcenterlockrecyclerviewexperiment.model.DummyGenerator;
 
 public class MainActivity extends AppCompatActivity {
 

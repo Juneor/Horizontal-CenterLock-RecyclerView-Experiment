@@ -1,6 +1,5 @@
-package com.dat.android.horizontalcenterlockrecyclerviewexperiment;
+package com.dat.android.horizontalcenterlockrecyclerviewexperiment.model;
 
-import com.dat.android.horizontalcenterlockrecyclerviewexperiment.model.CheeseListItem;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

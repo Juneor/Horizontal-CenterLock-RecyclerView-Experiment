@@ -10,6 +10,7 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import com.bumptech.glide.Glide;
+import com.dat.android.horizontalcenterlockrecyclerviewexperiment.model.Cheeses;
 import java.util.List;
 
 /**
@@ -49,14 +50,16 @@ public class HorizontalListAdapter extends RecyclerView.Adapter<HorizontalListAd
         return mValues.get(position);
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.avatar)
         protected ImageView avatar;
         @Bind(R.id.name)
         protected TextView name;
+        protected View container;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            container = itemView;
             ButterKnife.bind(this, itemView);
         }
     }

@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package com.dat.android.horizontalcenterlockrecyclerviewexperiment;
+package com.dat.android.horizontalcenterlockrecyclerviewexperiment.model;
 
+import com.dat.android.horizontalcenterlockrecyclerviewexperiment.R;
 import java.util.Random;
 
 public class Cheeses {
