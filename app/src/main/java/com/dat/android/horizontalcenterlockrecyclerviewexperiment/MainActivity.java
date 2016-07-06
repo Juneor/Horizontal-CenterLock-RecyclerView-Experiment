@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void init() {
         list.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new VerticalListAdapter(this, DummyGenerator.getCheeseItems(5));
+        adapter = new VerticalListAdapter(this, DummyGenerator.getCheeseItems(15));
         list.setAdapter(adapter);
     }
 }

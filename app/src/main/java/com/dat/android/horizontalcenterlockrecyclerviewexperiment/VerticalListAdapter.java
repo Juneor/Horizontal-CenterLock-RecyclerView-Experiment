@@ -5,10 +5,12 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import com.dat.android.horizontalcenterlockrecyclerviewexperiment.model.CheeseListItem;
@@ -34,7 +36,9 @@ public class VerticalListAdapter extends RecyclerView.Adapter<VerticalListAdapte
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
+        holder.cheeseType.setText(mValues.get(position).getName());
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         holder.horizontalList.setLayoutManager(linearLayoutManager);
@@ -43,12 +47,22 @@ public class VerticalListAdapter extends RecyclerView.Adapter<VerticalListAdapte
         holder.horizontalList.setAdapter(horizontalListAdapter);
       /*  int spacing = (int) context.getResources().getDimension(R.dimen.center_lock_padding);
         holder.horizontalList.addItemDecoration(new HorizontalSpaceItemDecoration(spacing));*/
-        setupLockCenter(holder, position);
+        setupLockCenter(holder);
+        holder.horizontalList.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                holder.curPosition = holder.horizontalList.getScrollX();
+                Log.d("newState",
+                    "newState:" + recyclerView.getRight() + "  " + recyclerView.getTranslationX());
+            }
+        });
+        if (holder.curPosition != -1) {
+            holder.horizontalList.scrollToPosition(holder.curPosition);
+        }
     }
 
-    private void setupLockCenter(ViewHolder holder, int position) {
-        int itemWidth =
-            (int) context.getResources().getDimension(R.dimen.flexible_space_image_height);
+    private void setupLockCenter(final ViewHolder holder) {
         Display display = ((MainActivity) context).getWindowManager().getDefaultDisplay();
         final Point size = new Point();
         display.getSize(size);
@@ -70,8 +84,11 @@ public class VerticalListAdapter extends RecyclerView.Adapter<VerticalListAdapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        @Bind(R.id.cheeseType)
+        protected TextView cheeseType;
         @Bind(R.id.horizontal_list)
         protected RecyclerView horizontalList;
+        int curPosition = -1;
 
         public ViewHolder(View itemView) {
             super(itemView);
